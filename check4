@@ -1,17 +1,8 @@
 #!/bin/bash
 
-YES="\n\t\033[01;37mFunction \033[32mFOUND\033[m\n"
-NO="\n\t\033[01;37mFunction \033[31mNOT\033[37m found\n"
-
-NO
 if [ $# == '0' ]; then
-   	echo -e "Missing OPT/ARG. Run again with '--help' for more information"
-elif [ $1 == '-d' ] || [ $1 == '--dir' ]; then
-   	dir2check="$2"
-	if [ -d "$dir2check" ]; then
-		echo -e "$YES"
-	else
-		echo -e "$NO"
-	fi
-	unset dir2check
-elif [ $1 == '-fn'
+	. ./check4-dialog.sh
+elif [ $1 == '-f' ]; then
+	. ./func/check4func.sh "$2"
+fi
+

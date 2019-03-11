@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if ! hash dialog 2>/dev/null; then
+	apt update -y && apt install dialog -y
+fi
+
 #function aboutdialoggen(){
 #	dialog --clear --colors --title 'ABOUT MENU:' \
 #	--menu '\nAbout menu:\n ' 0 0 0 'H' 'Help' \
@@ -24,22 +28,25 @@ trap "rm -f $tempfile" 0 1 2 5 15
 #	--inputbox '\ninput filename\n\n' 0 0 newfilename )
 
 $DIALOG --visit-items --colors --no-tags --item-help --extra-button --help-button --hfile './tetfile.txt' --hline 'etataet' --extra-label 'About' --cancel-label ' NEXT PAGE ' --title 'Check 4 _____ script' --clear \
-	--menu 'Check options menu' 0 0 0 'function' '1. Function' 'Checks the current system for the specified function'\
+	--menu 'Check options menu' 0 0 0 'getfunc' '1. Function' 'Checks the current system for the specified function'\
 	'getalias' '2. Alias' 'Checks the current system for the specified alias'\
 	'getdir' '3. Directory' 'Checks the current location to see if the specified directory exists'\
 	'fselect' '4. File' 'Checks the current location to see if the specified file exists'\
-	'var' '5. Variable' 'Checks the current system for the specified variable' 2> $tempfile
+	'getapp' '5. App' 'Checks the current location to see if the specified file exists'\
+	'var' '6. Variable' 'Checks the current system for the specified variable' 2> $tempfile
 	
 retval=$?
 
 case $retval in
 0)
 #	DOPTION="$DIALOGGENERATOR/funcs/`cat $tempfile`/`cat $tempfile`.sh"
-	DOPTION="`cat $tempfile`.sh"
+	DOPTION="$DIALOGGENERATOR/funcs/`cat $tempfile`.sh"
+#	DOPTION="`cat $tempfile`.sh"
 	if [ ! -f $DOPTION ]; then
 		dialog --clear --title 'SORRY !' --msgbox "The option is not currently online. I just haven't finished writing the script yet. Come back later on and it should be finished" 0 0;
 	else
-		. "`cat $tempfile`.sh";
+		. "$DIALOGGENERATOR/funcs/`cat $tempfile`.sh"
+#		. "`cat $tempfile`.sh";
 	fi
 	;;
 1)
