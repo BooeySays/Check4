@@ -4,11 +4,6 @@ if ! hash dialog 2>/dev/null; then
 	apt update -y && apt install dialog -y
 fi
 
-#function aboutdialoggen(){
-#	dialog --clear --colors --title 'ABOUT MENU:' \
-#	--menu '\nAbout menu:\n ' 0 0 0 'H' 'Help' \
-#	'A' 'About us' \
-#	'V'	'Version' \
 if [ $DIALOGGENERATOR ]; then
 	unset DIALOGGENERATOR;
 fi
