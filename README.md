@@ -1,2 +1,3 @@
 # Check4
-Script to check for stuff 
+
+Simple script to check for stuff like functions, and aliases, directories, etc. 
